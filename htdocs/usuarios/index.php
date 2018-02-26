@@ -1,8 +1,7 @@
 <?php
-  $titulo = 'Registro';
+  $titulo = 'Editar Cuenta';
   if($_SERVER['REQUEST_METHOD'] == 'POST'){ 
     include '../DbSetup.php';
-
     $nombre=isset($_POST['nombre']) ? $_POST['nombre'] : '';
     $apellidos=isset($_POST['apellidos']) ? $_POST['apellidos'] : '';
     $correo = isset($_POST['correo']) ? $_POST['correo'] : '';
@@ -10,21 +9,23 @@
     $password_confirmation = isset($_POST['password_confirmation']) ? $_POST['password_confirmation'] : '';
     $direccion=isset($_POST['direccion']) ? $_POST['direccion'] : '';
     $rol=isset($_POST['rol']) ? $_POST['rol'] : '';
+    $id = $usuario_model->findUser($_SESSION['usuario_id']);
 
-
-echo $rol;
 
     if ($contrasenna != $password_confirmation) {
       echo "<h3>Las contraseñas no coinciden</h3>";
     } else if(($nombre=='')||($apellidos=='')||($correo=='')||($direccion=='')||($rol=='')){
       echo "Todos los datos son requeridos";
     }else {
-     $usuario_model->insert( $nombre, $apellidos, $correo, $contrasenna,$direccion,$rol);
+     
+     $usuario_model->update( $id['id'],$nombre, $apellidos, $correo, $contrasenna,$direccion,$rol);
       echo "<h3>Usuario registrado con éxito</h3>";
-      return header("Location: /seguridad/login.php");
+      return header("Location: /home/index.php");
     }
   }
   include '../shared/header.php';
+  include '../shared/nav.php';
+
 ?>
   <form method="POST">
 
@@ -52,8 +53,7 @@ echo $rol;
       <option  value="Comprador">Comprador</option>
     </select> 
     <br>
-    <input type="submit" name="" value="Registrarme!">
-    <a href="/seguridad/login.php">Login</a>
+    <input type="submit" name="" value="Guardar">
   </form>
 <?php
 include '../shared/footer.php';

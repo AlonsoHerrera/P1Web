@@ -47,5 +47,5 @@ namespace Models {
       $sql = "DELETE FROM clientes WHERE id = $id";
       $this->connection->executeSql($sql);
     }
-  }
+  } 
 }
