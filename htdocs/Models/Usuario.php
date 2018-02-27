@@ -32,7 +32,6 @@ namespace Models {
       $sql = "UPDATE usuario SET nombre = '$nombre', apellidos='$apellidos',correo='$correo',contrasenna='$contrasenna',direccion='$direccion',rol='$rol' WHERE id = $id";
       $this->connection->executeSql($sql);
     }
-
   }
 }
  
