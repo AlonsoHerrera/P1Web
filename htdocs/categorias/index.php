@@ -1,5 +1,5 @@
 <?php
-$titulo = 'Articulos';
+$titulo = 'Categorias';
 $search = isset($_GET['search']) ? $_GET['search'] : '';
 ?>
 <!DOCTYPE html>
@@ -11,33 +11,36 @@ $search = isset($_GET['search']) ? $_GET['search'] : '';
 <body>
   <?php include '../shared/header.php';
         include '../shared/nav.php'; ?>
-  <h2>Editar Articulos</h2>
+  <?php 
+    include '../seguridad/verificar_session.php';
+    include '../DbSetup.php';
+    $user = $usuario_model->findUser($_SESSION['usuario_id']);
+    if ($user['rol'] == "Comprador"){ 
+      return header("Location: /home/fail.php");
+  }?>
+  <h2>Editar Categorias</h2>
   <form method="GET">
-    <input type="text" autofocus name="search" value="<?php echo $search ?>">
-    <input type="submit" value="Search">
+    <!--<input type="text" autofocus name="search" value="<?php echo $search ?>">
+    <input type="submit" value="Search">-->
   </form>
   <table border="1">
     <tr>
       <th>ID</th>
       <th>Descripción</th>
-      <th>ID Categoria</th>
-      <th>Imagen</th>
-      <th><a href="/articulos/index.php">+</a></th>
+      <th><a href="/categorias/new.php">+</a></th>
     </tr>
     <?php
       include '../DbSetup.php';
-      $result_array = $articulo_model->index($search);
+      $result_array = $categoria_model->index($search);
       foreach ($result_array as $row) {
         echo "<tr>";
           echo "<td>" . $row['id'] . "</td>";
           echo "<td>" . $row['descripcion'] . "</td>";
-          echo "<td>" . $row['id_categoria'] . "</td>";
-          echo "<td>" . $row['imagen'] . "</td>";
 
           echo "<td>" .
-                "<a href='/articulos/edit.php?id=" . $row['id'] . "'>Editar</a>".
+                "<a href='/categorias/edit.php?id=" . $row['id'] . "'>Editar</a>".
                 " ".
-                "<a href='/articulos/delete.php?id=" . $row['id'] . "'>Eliminar</a>".
+                "<a href='/categorias/delete.php?id=" . $row['id'] . "'>Eliminar</a>".
                 "</td>";
         echo "</tr>";
       }

@@ -2,7 +2,7 @@
 
 namespace Models {
 
-  class Articulo
+  class Categoria
   {
     private $connection;
     function __construct($connection)
@@ -12,13 +12,11 @@ namespace Models {
 
     public function index($search)
     {
-      $sql = "select * from articulo ";
+      $sql = "select * from categoria ";
       if ($search) {
         $search_criteria = [];
         array_push($search_criteria, "id = " . intval($search));
         array_push($search_criteria, "descripcion ilike '%" . $search ."%'");
-        array_push($search_criteria, "id_categoria ilike '%" . $search ."%'");
-        array_push($search_criteria, "imagen ilike '%" . $search ."%'");
 
         $sql .= " where " . join($search_criteria, ' or ');
       }
@@ -27,28 +25,28 @@ namespace Models {
       return $this->connection->getResults($result);
     }
 
-    public function insert($descripcion,$id_categoria,$imagen)
+    public function insert($descripcion)
     {
       echo $id_categoria;
-      $sql = "INSERT INTO articulo(descripcion,id_categoria,imagen) VALUES ('$descripcion','$id_categoria','$imagen')";
+      $sql = "INSERT INTO categoria(descripcion) VALUES ('$descripcion')";
       $this->connection->executeSql($sql);
     }
 
-       public function findArticulo($id)
+       public function findCategoria($id)
     {
-      $result = $this->connection->executeSql("select * from articulo where id = '$id'");
+      $result = $this->connection->executeSql("select * from categoria where id = '$id'");
       return $this->connection->getResults($result)[0];
     }
 
-     public function update($id,$descripcion,$id_categoria,$imagen)
+     public function update($id,$descripcion)
     {
-      $sql = "UPDATE articulo SET descripcion='$descripcion',id_categoria='$id_categoria',imagen='$imagen' WHERE id = $id";
+      $sql = "UPDATE categoria SET descripcion='$descripcion' WHERE id = $id";
       $this->connection->executeSql($sql);
     }
 
     public function delete($id)
     {
-      $sql = "DELETE FROM articulo WHERE id = $id";
+      $sql = "DELETE FROM categoria WHERE id = $id";
       $this->connection->executeSql($sql);
     }
   }

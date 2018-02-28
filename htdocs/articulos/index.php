@@ -1,39 +1,55 @@
 <?php
-  $titulo = 'Agregar Articulo';
-  if($_SERVER['REQUEST_METHOD'] == 'POST'){ 
-    include '../DbSetup.php';
-
-    $descripcion=isset($_POST['descripcion']) ? $_POST['descripcion'] : '';
-    $id_categoria=isset($_POST['id_categoria']) ? $_POST['id_categoria'] : '';
-    $imagen = isset($_POST['imagen']) ? $_POST['imagen'] : '';
-
-
-    if(($descripcion=='')||($id_categoria=='')||($imagen=='')){
-      echo "Todos los datos son requeridos";
-    }else {
-     $articulo_model->insert( $descripcion, $id_categoria, $imagen);
-      echo "<h3>Articulo registrado con éxito</h3>";
-      return header("Location: /home/index.php");
-    }
-  }
-  include '../shared/header.php';
-  include '../shared/nav.php';
-
+$titulo = 'Articulos';
+$search = isset($_GET['search']) ? $_GET['search'] : '';
 ?>
-  <form method="POST">
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Página php</title>
+  <meta charset="utf-8">
+</head>
+<body>
+  <?php 
+  include '../seguridad/verificar_session.php';
+  include '../DbSetup.php';
+  $user = $usuario_model->findUser($_SESSION['usuario_id']);
+  if ($user['rol'] == "Comprador"){ 
+      return header("Location: /home/fail.php");
+  }?>
 
-    <label>Descripcion:</label>
-    <input type="text" name="descripcion" >
-    <br>
-    <label>id_categoria:</label>
-    <input type="text" name="id_categoria">
-    <br>
-    <label>Imagen: </label>
-    <input type="text" name="imagen">
-    <br>
-    <input type="submit" name="" value="Guardar">
+  <?php include '../shared/header.php';
+        include '../shared/nav.php'; ?>
+  <h2>Editar Articulos</h2>
+  <form method="GET">
+     <!--<input type="text" autofocus name="search" value="<?php echo $search ?>">
+    <input type="submit" value="Search">-->
   </form>
-<?php
-include '../shared/footer.php';
-?>
+  <table border="1">
+    <tr>
+      <th>ID</th>
+      <th>Descripción</th>
+      <th>ID Categoria</th>
+      <th>Imagen</th>
+      <th><a href="/articulos/new.php">+</a></th>
+    </tr>
+    <?php
+      include '../DbSetup.php';
+      $result_array = $articulo_model->index($search);
+      foreach ($result_array as $row) {
+        echo "<tr>";
+          echo "<td>" . $row['id'] . "</td>";
+          echo "<td>" . $row['descripcion'] . "</td>";
+          echo "<td>" . $row['id_categoria'] . "</td>";
+          echo "<td>" . $row['imagen'] . "</td>";
 
+          echo "<td>" .
+                "<a href='/articulos/edit.php?id=" . $row['id'] . "'>Editar</a>".
+                " ".
+                "<a href='/articulos/delete.php?id=" . $row['id'] . "'>Eliminar</a>".
+                "</td>";
+        echo "</tr>";
+      } 
+    ?>
+  </table>
+</body>
+</html>

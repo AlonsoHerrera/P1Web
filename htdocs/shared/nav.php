@@ -9,7 +9,11 @@
   <li> <a href="/home/index.php">Home</a></li>
   <li><a href="/usuarios/index.php">Editar cuenta</a></li>  
   <li><a href="/seguridad/logout.php">Logout</a></li>
-  <li><a href="/articulos/index.php">Agregar Articulos</a>
-  <li><a href="/articulos/inedit.php">Editar Articulos</a></li>
+  <li><a href="/articulos/new.php">Agregar Articulos</a>
+  <li><a href="/articulos/index.php">Editar Articulos</a></li>
+  <li><a href="/categorias/new.php">Agregar Categorias</a></li>
+  <li><a href="/categorias/index.php">Editar Categorias</a></li>
+
+
   </li>
 </ul> 

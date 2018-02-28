@@ -12,6 +12,12 @@
   }
   $articulo = $articulo_model->findArticulo($id);
 ?>
+ <?php 
+  include '../DbSetup.php';
+  $user = $usuario_model->findUser($_SESSION['usuario_id']);
+  if ($user['rol'] == "Comprador"){ 
+    return header("Location: /home/fail.php");
+  }?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -32,7 +38,7 @@
     <input type="text" name="imagen" required autofocus value="<?= $articulo['imagen']?>">
 
     <input type="submit" value="Salvar">
-    <a href="/articulos/inedit.php">Atras</a>
+    <a href="/articulos/index.php">Atras</a>
   </form>
 </body>
 </html>

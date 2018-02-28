@@ -1,7 +1,8 @@
 <?php
   $titulo = 'Editar Cuenta';
+  include '../seguridad/verificar_session.php';
+  include '../DbSetup.php';
   if($_SERVER['REQUEST_METHOD'] == 'POST'){ 
-    include '../DbSetup.php';
     $nombre=isset($_POST['nombre']) ? $_POST['nombre'] : '';
     $apellidos=isset($_POST['apellidos']) ? $_POST['apellidos'] : '';
     $correo = isset($_POST['correo']) ? $_POST['correo'] : '';
@@ -10,7 +11,6 @@
     $direccion=isset($_POST['direccion']) ? $_POST['direccion'] : '';
     $rol=isset($_POST['rol']) ? $_POST['rol'] : '';
     $id = $usuario_model->findUser($_SESSION['usuario_id']);
-
 
     if ($contrasenna != $password_confirmation) {
       echo "<h3>Las contraseñas no coinciden</h3>";
@@ -23,29 +23,36 @@
       return header("Location: /home/index.php");
     }
   }
+  $usuario = $usuario_model->findUser($_SESSION['usuario_id']);
+
   include '../shared/header.php';
   include '../shared/nav.php';
 
 ?>
+<?php 
+  $user = $usuario_model->findUser($_SESSION['usuario_id']);
+  if ($user['rol'] == "Comprador"){ 
+    return header("Location: /home/fail.php");
+}?>
   <form method="POST">
 
     <label>Nombre:</label>
-    <input type="text" name="nombre" >
+    <input type="text" name="nombre" required autofocus value="<?= $usuario['nombre']?>" >
     <br>
     <label>Apellidos:</label>
-    <input type="text" name="apellidos">
+    <input type="text" name="apellidos" required autofocus value="<?= $usuario['apellidos']?>">
     <br>
     <label>Email: </label>
-    <input type="email" name="correo">
+    <input type="email" name="correo" required autofocus value="<?= $usuario['correo']?>">
     <br>
     <label>Contraseña:</label>
-    <input type="password" name="contrasenna">
+    <input type="password" name="contrasenna" required autofocus value="<?= $usuario['contrasenna']?>">
     <br>
     <label>Confirmar Contraseña:</label>
     <input type="password" name="password_confirmation">
     <br>
     <label>Dirección: </label>
-    <input type="text" name="direccion">
+    <input type="text" name="direccion" required autofocus value="<?= $usuario['direccion']?>">
     <br>
     <label>Rol: </label>
     <select name="rol">
