@@ -8,7 +8,8 @@ $search = isset($_GET['search']) ? $_GET['search'] : '';
   <title>Página php</title>
   <meta charset="utf-8">
 </head>
-<body>
+<body class="text-center">
+  
   <?php 
   include '../seguridad/verificar_session.php';
   include '../DbSetup.php';
@@ -19,18 +20,20 @@ $search = isset($_GET['search']) ? $_GET['search'] : '';
 
   <?php include '../shared/header.php';
         include '../shared/nav.php'; ?>
+
+  <!--<form method="GET">
+     <input type="text" autofocus name="search" value="<?php echo $search ?>">
+    <input type="submit" value="Search">
+  </form>-->
+  
   <h2>Editar Articulos</h2>
-  <form method="GET">
-     <!--<input type="text" autofocus name="search" value="<?php echo $search ?>">
-    <input type="submit" value="Search">-->
-  </form>
-  <table border="1">
+  <table align="center" border="3">
     <tr>
-      <th>ID</th>
-      <th>Descripción</th>
-      <th>ID Categoria</th>
-      <th>Imagen</th>
-      <th><a href="/articulos/new.php">+</a></th>
+      <th class="text-center">ID</th>
+      <th class="text-center">Descripción</th>
+      <th class="text-center">ID Categoria</th>
+      <th class="text-center">Imagen</th>
+      <th class="text-center"><a href="/articulos/new.php">New</a></th>
     </tr>
     <?php
       include '../DbSetup.php';
@@ -41,7 +44,6 @@ $search = isset($_GET['search']) ? $_GET['search'] : '';
           echo "<td>" . $row['descripcion'] . "</td>";
           echo "<td>" . $row['id_categoria'] . "</td>";
           echo "<td>" . $row['imagen'] . "</td>";
-
           echo "<td>" .
                 "<a href='/articulos/edit.php?id=" . $row['id'] . "'>Editar</a>".
                 " ".

@@ -1,5 +1,5 @@
 <?php
-  $titulo = 'Agregar Articulo';
+  $titulo = 'Articulos';
   if($_SERVER['REQUEST_METHOD'] == 'POST'){ 
     include '../DbSetup.php';
 
@@ -26,19 +26,60 @@
   if ($user['rol'] == "Comprador"){ 
       return header("Location: /home/fail.php");
   }?>
-  <form method="POST">
 
+<body class="text-center">
+  <h2>Agregar Articulos</h2>
+  <form method="POST">
     <label>Descripcion:</label>
-    <input type="text" name="descripcion" >
+    <input type="text" placeholder="Descripción" name="descripcion" >
     <br>
-    <label>id_categoria:</label>
-    <input type="text" name="id_categoria">
+    <label>ID Categoria:</label>
+    <input type="text" placeholder="ID Categoria" name="id_categoria">
     <br>
-    <label>Imagen: </label>
-    <input type="text" name="imagen">
+    
+    
+    <style>
+      .thumb {
+      height: 2 00px;
+      border: 1px solid #000;
+      margin: 10px 5px 0 0;
+      }
+    </style>
+    
+    <input type="file" id="files" name="imagen" >
+    <br />
+    <output id="list"></output>
+       
+    <script>
+      function archivo(evt) {
+        var files = evt.target.files; // FileList object
+   
+        // Obtenemos la imagen del campo "file".
+        for (var i = 0, f; f = files[i]; i++) {
+          //Solo admitimos imágenes.
+          if (!f.type.match('image.*')) {
+              continue;
+          }
+   
+          var reader = new FileReader();
+   
+          reader.onload = (function(theFile) {
+            return function(e) {
+            // Insertamos la imagen
+            document.getElementById("list").innerHTML = ['<img class="thumb" src="', e.target.result,'" title="', escape(theFile.Location), '"/>'].join('');
+            };
+          })(f);
+   
+          reader.readAsDataURL(f);
+        }
+      }
+      document.getElementById('files').addEventListener('change', archivo, false);
+      </script>
+    
     <br>
     <input type="submit" name="" value="Guardar">
   </form>
+</body>
 <?php
 include '../shared/footer.php';
 ?>

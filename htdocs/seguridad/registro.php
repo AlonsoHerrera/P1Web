@@ -11,7 +11,6 @@
     $direccion=isset($_POST['direccion']) ? $_POST['direccion'] : '';
     $rol=isset($_POST['rol']) ? $_POST['rol'] : '';
 
-
 echo $rol;
 
     if ($contrasenna != $password_confirmation) {
@@ -26,36 +25,31 @@ echo $rol;
   }
   include '../shared/header.php';
 ?>
-  <form method="POST">
+<body class="text-center ">
+  <form  method="POST">
 
-    <label>Nombre:</label>
-    <input type="text" name="nombre" >
+    <input placeholder="Nombre" type="text" name="nombre" >
     <br>
-    <label>Apellidos:</label>
-    <input type="text" name="apellidos">
+    <input placeholder="Apellidos" type="text" name="apellidos">
     <br>
-    <label>Email: </label>
-    <input type="email" name="correo">
+    <input placeholder="Correo" type="email" name="correo">
     <br>
-    <label>Contraseña:</label>
-    <input type="password" name="contrasenna">
+    <input placeholder="Contraseña" type="password" name="contrasenna">
     <br>
-    <label>Confirmar Contraseña:</label>
-    <input type="password" name="password_confirmation">
+    <input placeholder="Confirmar contraseña" type="password" name="password_confirmation">
     <br>
-    <label>Dirección: </label>
-    <input type="text" name="direccion">
+    <input placeholder="Direccion" type="text" name="direccion">
     <br>
     <label>Rol: </label>
-    <select name="rol">
+    <select class="btn-info" name="rol">
       <option  value="Administrador" >Administrador</option>
       <option  value="Comprador">Comprador</option>
     </select> 
     <br>
-    <input type="submit" name="" value="Registrarme!">
+    <input class="btn btn-primary" type="submit" name="" value="Registrarme!">
     <a href="/seguridad/login.php">Login</a>
   </form>
+</body>
 <?php
 include '../shared/footer.php';
 ?>
-

@@ -1,5 +1,5 @@
 <?php
-  $titulo = 'Agregar Categoria';
+  $titulo = 'Categorias';
   if($_SERVER['REQUEST_METHOD'] == 'POST'){ 
     include '../DbSetup.php';
 
@@ -22,13 +22,15 @@
   if ($user['rol'] == "Comprador"){ 
     return header("Location: /home/fail.php");
   }?>
+<body class="text-center">
+  <h2>Agregar Categoria</h2>
   <form method="POST">
-
     <label>Descripcion:</label>
-    <input type="text" name="descripcion" >
+    <input type="text" placeholder="Descripción" name="descripcion" >
     <br>
-    <input type="submit" name="" value="Guardar">
+    <input type="submit" placeholder="Guardar" name="" value="Guardar">
   </form>
+</body>  
 <?php
 include '../shared/footer.php';
 ?>

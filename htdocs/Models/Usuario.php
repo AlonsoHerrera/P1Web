@@ -29,7 +29,7 @@ namespace Models {
     }
      public function update($id, $nombre,$apellidos,$correo,$contrasenna,$direccion,$rol)
     {
-      $sql = "UPDATE usuario SET nombre = '$nombre', apellidos='$apellidos',correo='$correo',contrasenna='$contrasenna',direccion='$direccion',rol='$rol' WHERE id = $id";
+      $sql = "UPDATE usuario SET nombre = '$nombre', apellidos='$apellidos',correo='$correo',contrasenna=md5('$contrasenna'),direccion='$direccion',rol='$rol' WHERE id = $id";
       $this->connection->executeSql($sql);
     }
   }

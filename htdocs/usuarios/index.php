@@ -34,27 +34,20 @@
   if ($user['rol'] == "Comprador"){ 
     return header("Location: /home/fail.php");
 }?>
+<body class="text-center">
   <form method="POST">
-
-    <label>Nombre:</label>
-    <input type="text" name="nombre" required autofocus value="<?= $usuario['nombre']?>" >
+    <input type="text" placeholder="Nombre" name="nombre" required autofocus value="<?= $usuario['nombre']?>" >
     <br>
-    <label>Apellidos:</label>
-    <input type="text" name="apellidos" required autofocus value="<?= $usuario['apellidos']?>">
+    <input type="text" placeholder="Apellidos" name="apellidos" required autofocus value="<?= $usuario['apellidos']?>">
     <br>
-    <label>Email: </label>
-    <input type="email" name="correo" required autofocus value="<?= $usuario['correo']?>">
+    <input type="email" placeholder="Correo" name="correo" required autofocus value="<?= $usuario['correo']?>">
     <br>
-    <label>Contraseña:</label>
-    <input type="password" name="contrasenna" required autofocus value="<?= $usuario['contrasenna']?>">
+    <input type="password" placeholder="Contraseña" name="contrasenna" >
     <br>
-    <label>Confirmar Contraseña:</label>
-    <input type="password" name="password_confirmation">
+    <input type="password" placeholder="Confirmar contraseña" name="password_confirmation">
     <br>
-    <label>Dirección: </label>
-    <input type="text" name="direccion" required autofocus value="<?= $usuario['direccion']?>">
+    <input type="text" placeholder="Direccion" name="direccion" required autofocus value="<?= $usuario['direccion']?>">
     <br>
-    <label>Rol: </label>
     <select name="rol">
       <option  value="Administrador" >Administrador</option>
       <option  value="Comprador">Comprador</option>
@@ -62,6 +55,7 @@
     <br>
     <input type="submit" name="" value="Guardar">
   </form>
+</body>
 <?php
 include '../shared/footer.php';
 ?>

@@ -15,16 +15,19 @@
   }
   include '../shared/header.php';
 ?>
-  <form method="POST">
-    <label>Email: </label>
-    <input type="email" name="correo" value="<?= isset($_POST['correo']) ? $_POST['correo'] : ''; ?>">
+
+<body class="text-center">
+  <form class="form-signin" method="POST">
+    <input type="email" id="inputEmail" placeholder="Correo electronico" name="correo" value="<?= isset($_POST['correo']) ? $_POST['correo'] : ''; ?>">
     <br>
-    <label>Contraseña:</label>
-    <input type="password" name="contrasenna">
+    <input type="password" placeholder="Contraseña" name="contrasenna">
     <br>
-    <input type="submit" name="" value="Login!">
+    <input class="btn btn-primary" type="submit" name="" value="Login!">
     <a href="/seguridad/registro.php">Registrarse</a>
   </form>
+</body>
 <?php
 include '../shared/footer.php';
 ?>
+
+
