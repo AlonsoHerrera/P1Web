@@ -6,12 +6,13 @@
     $descripcion=isset($_POST['descripcion']) ? $_POST['descripcion'] : '';
     $id_categoria=isset($_POST['id_categoria']) ? $_POST['id_categoria'] : '';
     $imagen = isset($_POST['imagen']) ? $_POST['imagen'] : '';
+    $nombre=isset($_POST['nombre']) ? $_POST['nombre'] : '';
+    $precio=isset($_POST['precio']) ? $_POST['precio'] : '';
 
-
-    if(($descripcion=='')||($id_categoria=='')||($imagen=='')){
+    if(($descripcion=='')||($id_categoria=='')||($imagen=='')||($nombre=='')||($precio=='')){
       echo "Todos los datos son requeridos";
     }else {
-     $articulo_model->insert( $descripcion, $id_categoria, $imagen);
+     $articulo_model->insert( $descripcion, $id_categoria, $imagen,$nombre,$precio);
       echo "<h3>Articulo registrado con éxito</h3>";
       return header("Location: /home/index.php");
     }
@@ -30,13 +31,25 @@
 <body class="text-center">
   <h2>Agregar Articulos</h2>
   <form method="POST">
+    <label>Nombre</label>
+    <input type="text" placeholder="nombre" name="nombre">
+    <br>
     <label>Descripcion:</label>
     <input type="text" placeholder="Descripción" name="descripcion" >
     <br>
-    <label>ID Categoria:</label>
-    <input type="text" placeholder="ID Categoria" name="id_categoria">
+    <label>Categoria:</label>
+    <select name="id_categoria">
+    <?php
+      $result_array1 = $categoria_model->index($search);
+      foreach ($result_array1 as $row) {
+        echo "<option  value='".$row['descripcion']."''>".$row['descripcion']."</option>";    
+      } 
+     ?>
+    </select> 
     <br>
-    
+    <label>Precio</label>
+    <input  type="number" placeholder="precio" name="precio"  min="1">
+    <br>
     
     <style>
       .thumb {
@@ -49,7 +62,7 @@
     <input type="file" id="files" name="imagen" >
     <br />
     <output id="list"></output>
-       
+
     <script>
       function archivo(evt) {
         var files = evt.target.files; // FileList object
@@ -75,7 +88,6 @@
       }
       document.getElementById('files').addEventListener('change', archivo, false);
       </script>
-    
     <br>
     <input type="submit" name="" value="Guardar">
   </form>

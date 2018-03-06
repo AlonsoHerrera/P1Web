@@ -32,6 +32,10 @@ namespace Models {
       $sql = "UPDATE usuario SET nombre = '$nombre', apellidos='$apellidos',correo='$correo',contrasenna=md5('$contrasenna'),direccion='$direccion',rol='$rol' WHERE id = $id";
       $this->connection->executeSql($sql);
     }
+    public function getIdUsuario()
+    {
+      $result = $this->connection->executeSql("select * from usuario where id =  (SELECT MAX(id) FROM usuario)");
+      return $this->connection->getResults($result)[0];
   }
 }
- 
+ }

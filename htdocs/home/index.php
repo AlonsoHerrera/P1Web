@@ -1,66 +1,63 @@
 <?php
   $titulo = 'Home';
+   // include '../seguridad/verificar_session.php';
   include '../shared/header.php';
   include '../shared/nav.php';
   include '../shared/footer.php';
   include '../DbSetup.php';
+  $search = isset($_GET['search']) ? $_GET['search'] : '';
+
+  $user = $usuario_model->findUser($_SESSION['usuario_id']);
+
+  if ($user['rol'] == "Comprador"){  
+      return header("Location: /home/fail.php");
+  }
+
 ?>
-	
-	<body>
+<body>
+<div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
+  <h1 class="display-4">Articulos</h1>
+</div>
+<div class="container">
+          
+<form method="GET">
+<select name="search">
+  <?php
+    $result_array2 = $categoria_model->index($search);
+    foreach ($result_array2 as $row) {
+      echo "  <option  value='". $row['descripcion'] ."' >".$row['descripcion'] . "</option>";
+    }
+  ?>
+</select>
+<input type="submit" value="Search">
+</form>
 
-    <div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
-      <h1 class="display-4">Articulos</h1>
-      
-    </div>
+<form method="GET">
+  <input type="submit" value="Limpiar filtro">
+</form>
 
-    <div class="container">
-      <div class="card-deck mb-3 text-center">
-
-       <div class="card mb-4 box-shadow">
-          <div class="card-header">
-            <h4 class="my-0 font-weight-normal"> articulo </h4>
-          </div>
-          <div class="card-body">
-            <h1 class="card-title pricing-card-title">$0 <small class="text-muted"></small></h1>
-            <ul class="list-unstyled mt-3 mb-4">
-              <li>Descripcion aqui</li>
-            </ul>
-            <button type="button" class="btn btn-lg btn-block btn-outline-primary">Añadir al carrito</button>
-          </div>
-        </div>
-
-        <div class="card mb-4 box-shadow">
-          <div class="card-header">
-            <h4 class="my-0 font-weight-normal">articulo</h4>
-          </div>
-          <div class="card-body">
-            <h1 class="card-title pricing-card-title">$15 <small class="text-muted"></small></h1>
-            <ul class="list-unstyled mt-3 mb-4">
-              <li>Descripcion aqui</li>
-            </ul>
-            <button type="button" class="btn btn-lg btn-block btn-outline-primary">Añadir al carrito</button>
-          </div>
-        </div>
-
-        <div class="card mb-4 box-shadow">
-          <div class="card-header">
-            <h4 class="my-0 font-weight-normal">articulo</h4>
-          </div>
-          <div class="card-body">
-            <h1 class="card-title pricing-card-title">$29 <small class="text-muted"></small></h1>
-            <ul class="list-unstyled mt-3 mb-4">
-             <li>Descripcion aqui</li>
-            </ul>
-            <button type="button" class="btn btn-lg btn-block btn-outline-primary">Añadir al carrito</button>
-          </div>
-        </div>
-
-      </div>
-
-      <footer class="pt-4 my-md-5 pt-md-5 border-top">
-       
-      </footer>
-    </div>
+<div class="card-deck mb-3 text-center">
+ <?php
+      $result_array = $articulo_model->index2($search);
+        foreach ($result_array as $row) {
+        echo (" <div class='card mb-4 box-shadow'> ");   
+        echo" <div class='card-header'>";
+        echo " <h4 class='my-0 font-weight-normal'>".$row['nombre']."</h4>";
+        echo "</div>";   
+        echo "<div class='card-body'>";  
+        echo " <h1 class='card-title pricing-card-title'>"."$".$row['precio']. "<small class='text-muted'></small></h1>";
+        echo " <ul class='list-unstyled mt-3 mb-4'>";
+        echo "<li>".$row['descripcion']."</li>"; 
+        echo"</ul>" ;  
+        echo "<button type='button' class='btn btn-lg btn-block btn-outline-primary'>Añadir al carrito</button>";  
+        echo " </div>";
+        echo " </div>"; 
+      } 
+    ?>
+</div>
+<footer class="pt-4 my-md-5 pt-md-5 border-top">
+</footer>
+</div>
 
 
     <!-- Bootstrap core JavaScript

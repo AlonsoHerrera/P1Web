@@ -11,14 +11,15 @@
     $direccion=isset($_POST['direccion']) ? $_POST['direccion'] : '';
     $rol=isset($_POST['rol']) ? $_POST['rol'] : '';
 
-echo $rol;
-
     if ($contrasenna != $password_confirmation) {
       echo "<h3>Las contraseñas no coinciden</h3>";
     } else if(($nombre=='')||($apellidos=='')||($correo=='')||($direccion=='')||($rol=='')){
       echo "Todos los datos son requeridos";
     }else {
      $usuario_model->insert( $nombre, $apellidos, $correo, $contrasenna,$direccion,$rol);
+     $user= $usuario_model->getIdUsuario();
+       $carrito_model->insert( $user['id']);
+       echo "Este es el id:" .$user['id'];
       echo "<h3>Usuario registrado con éxito</h3>";
       return header("Location: /seguridad/login.php");
     }
@@ -52,4 +53,4 @@ echo $rol;
 </body>
 <?php
 include '../shared/footer.php';
-?>
+?> 

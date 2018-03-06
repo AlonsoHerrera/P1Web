@@ -30,10 +30,12 @@ $search = isset($_GET['search']) ? $_GET['search'] : '';
   <table align="center" border="3">
     <tr>
       <th class="text-center">ID</th>
+      <th class="text-center">Nombre</th>
       <th class="text-center">Descripción</th>
+      <th class="text-center">Precio</th>
       <th class="text-center">ID Categoria</th>
       <th class="text-center">Imagen</th>
-      <th class="text-center"><a href="/articulos/new.php">New</a></th>
+      <th class="text-center">Opciones</th>
     </tr>
     <?php
       include '../DbSetup.php';
@@ -41,7 +43,9 @@ $search = isset($_GET['search']) ? $_GET['search'] : '';
       foreach ($result_array as $row) {
         echo "<tr>";
           echo "<td>" . $row['id'] . "</td>";
+          echo "<td>" . $row['nombre'] . "</td>";
           echo "<td>" . $row['descripcion'] . "</td>";
+          echo "<td>" . $row['precio'] . "</td>";
           echo "<td>" . $row['id_categoria'] . "</td>";
           echo "<td>" . $row['imagen'] . "</td>";
           echo "<td>" .

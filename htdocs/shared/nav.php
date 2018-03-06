@@ -30,6 +30,9 @@
       <li class="nav-item">
         <a class="nav-link" href="/categorias/index.php">Editar Categorias</a>
       </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/carrito_compras/index.php">Carrito Compras</a>
+      </li>
     </ul>
     <form class="form-inline my-2 my-lg-0">
       <input class="form-control mr-sm-2" type="text" placeholder="Search">

@@ -5,9 +5,11 @@
   $id = isset($_GET['id']) ? $_GET['id'] : '';
   if($_SERVER['REQUEST_METHOD'] == 'POST'){
     $descripcion = isset($_POST['descripcion']) ? $_POST['descripcion'] : '';
-    $id_categoria = isset($_POST['id_categoria']) ? $_POST['id_categoria'] : '';
+    $id_categoria = isset($_POST['id_categoria']) ? $_POST['id_categoria'] : '';;
     $imagen = isset($_POST['imagen']) ? $_POST['imagen'] : '';
-    $articulo_model->update($id, $descripcion, $id_categoria, $imagen);
+    $nombre=isset($_POST['nombre']) ? $_POST['nombre'] : '';
+    $precio=isset($_POST['precio']) ? $_POST['precio'] : '';
+    $articulo_model->update($id, $descripcion, $id_categoria, $imagen,$nombre,$precio);
     return header("Location: /articulos");
   }
   $articulo = $articulo_model->findArticulo($id);
@@ -28,11 +30,24 @@
 <body>
   <h2>Editar Articulo</h2>
   <form method="POST">
+    <label>Nombre:</label>
+    <input type="text" name="nombre" required autofocus value="<?= $articulo['nombre']?>">
+    <br>
     <label>Descripción:</label>
     <input type="text" name="descripcion" required autofocus value="<?= $articulo['descripcion']?>">
     <br>
-    <label>Id Categoria:</label>
-    <input type="text" name="id_categoria" required autofocus value="<?= $articulo['id_categoria']?>">
+    <label>Categoria:</label>
+    <select name="id_categoria">
+    <?php
+      $result_array1 = $categoria_model->index($search);
+      foreach ($result_array1 as $row) {
+        echo "<option  value='".$row['descripcion']."''>".$row['descripcion']."</option>";    
+      } 
+     ?>
+    </select> 
+    <br>
+     <label>Precio:</label>
+    <input type="text" name="precio" required autofocus value="<?= $articulo['precio']?>">
     <br>
     <label>Imagen:</label>
     <input type="text" name="imagen" required autofocus value="<?= $articulo['imagen']?>">
