@@ -26,15 +26,26 @@ namespace Models {
       $result = $this->connection->executeSql($sql);
       return $this->connection->getResults($result);
     }
-    public function delete($idArticulo,$idCarrito)
+    /*public function delete($idArticulo,$idCarrito)
     {
       $sql = "DELETE FROM articuloscarrito WHERE idArticulo = $id and idCarrito = $idCarrito" ;
       $this->connection->executeSql($sql);
-    }
+    }*/
      public function insertArticulo($idArticulo, $cantidad,$idCarrito)
     {
       $sql = "INSERT INTO articuloscarrito(idArticulo,cantidad,idCarrito) VALUES ('$idArticulo','$cantidad','$idCarrito')";
       var_dump($sql);
+      $this->connection->executeSql($sql);
+    }
+
+    public function findArticulo($id)
+    {
+      $result = $this->connection->executeSql("select * from articuloscarrito where id = '$id'");
+      return $this->connection->getResults($result)[0];
+    }
+    public function delete($id)
+    {
+      $sql = "DELETE FROM articuloscarrito WHERE id = $id" ;
       $this->connection->executeSql($sql);
     }
   } 

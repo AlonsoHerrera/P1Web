@@ -9,9 +9,7 @@
   $user = $usuario_model->findUser($_SESSION['usuario_id']);
   
   $carrito= $carrito_model->getIdCarrito($user['id']);
-  if ($user['rol'] == "Comprador"){  
-      return header("Location: /home/fail.php");
-  }
+  
 if($_SERVER['REQUEST_METHOD'] == 'POST'){ 
 ?>
 <script type="text/javascript">
@@ -22,7 +20,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
 $cantidad = "<script type='text/javascript'> document.write(cant) </script>";
  $id=$_POST['idArticulo'];
  var_dump($id,$cantidad,$carrito['id']);
-$carrito_model->insertArticulo( intval($id),intval($cantidad),intval($carrito['id']));
+$carrito_model->insertArticulo( intval($id),'1',intval($carrito['id']));
 
 }
 ?>

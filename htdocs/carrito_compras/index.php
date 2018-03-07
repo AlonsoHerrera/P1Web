@@ -38,7 +38,7 @@ if ($user['rol'] == "Comprador"){
           echo "<td>" . $articulo['nombre'] . "</td>";
           echo "<td>" . $articulo['descripcion'] . "</td>";
           echo "<td>" . $row['cantidad'] . "</td>";
-          echo "<td>" ."<a href='/articulos/delete.php? id=" . $row['id'] . "'>Eliminar</a>"."</td>";
+          echo "<td>" ."<a href='/carrito_compras/delete.php? id=" . $row['id'] . "'>Eliminar</a>"."</td>";
         echo "</tr>";
     } 
 ?>
