@@ -65,7 +65,11 @@ namespace Models {
       $result = $this->connection->executeSql($sql);
       return $this->connection->getResults($result);
     }
-
+    public function getArticuloById($idArticulo)
+    {
+      $result = $this->connection->executeSql("select * from articulo where id =  '$idArticulo' ");
+      return $this->connection->getResults($result)[0];
+    }
   }
 }
- 
+  

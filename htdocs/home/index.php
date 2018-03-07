@@ -6,14 +6,31 @@
   include '../shared/footer.php';
   include '../DbSetup.php';
   $search = isset($_GET['search']) ? $_GET['search'] : '';
-
   $user = $usuario_model->findUser($_SESSION['usuario_id']);
-
+  
+  $carrito= $carrito_model->getIdCarrito($user['id']);
   if ($user['rol'] == "Comprador"){  
       return header("Location: /home/fail.php");
   }
-
+if($_SERVER['REQUEST_METHOD'] == 'POST'){ 
 ?>
+<script type="text/javascript">
+  var cant;
+  cant=prompt('Digite la cantidad de articulos que desea agregar:');
+</script>
+<?php 
+$cantidad = "<script type='text/javascript'> document.write(cant) </script>";
+ $id=$_POST['idArticulo'];
+ var_dump($id,$cantidad,$carrito['id']);
+$carrito_model->insertArticulo( intval($id),intval($cantidad),intval($carrito['id']));
+
+}
+?>
+<style type="text/css">
+  #id{
+    display : none;
+  }
+</style>
 <body>
 <div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
   <h1 class="display-4">Articulos</h1>
@@ -40,6 +57,7 @@
  <?php
       $result_array = $articulo_model->index2($search);
         foreach ($result_array as $row) {
+          echo " <form  method='POST'>";
         echo (" <div class='card mb-4 box-shadow'> ");   
         echo" <div class='card-header'>";
         echo " <h4 class='my-0 font-weight-normal'>".$row['nombre']."</h4>";
@@ -48,10 +66,14 @@
         echo " <h1 class='card-title pricing-card-title'>"."$".$row['precio']. "<small class='text-muted'></small></h1>";
         echo " <ul class='list-unstyled mt-3 mb-4'>";
         echo "<li>".$row['descripcion']."</li>"; 
+        echo "<input type='text' id='id' name='idArticulo' value='".$row['id']."'>";   
         echo"</ul>" ;  
-        echo "<button type='button' class='btn btn-lg btn-block btn-outline-primary'>Añadir al carrito</button>";  
+        //echo "<button type='button' class='btn btn-lg btn-block btn-outline-primary'>Añadir al carrito</button>";
+         echo "<input type='submit' name='' value='Añadir al carrito'>";   
+
         echo " </div>";
         echo " </div>"; 
+        echo "</form>";
       } 
     ?>
 </div>

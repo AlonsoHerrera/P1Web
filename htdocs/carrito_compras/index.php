@@ -25,21 +25,20 @@ if ($user['rol'] == "Comprador"){
 <h2>Editar Articulos</h2>
   <table align="center" border="3">
     <tr>
-      <th class="text-center">Descripción</th>
-      <th class="text-center">Imagen</th>
+      <th class="text-center">Nombre</th>
+      <th class="text-center">Descripcion</th>
       <th class="text-center">Cantidad</th>
-      <th class="text-center">Total</th>
      </tr>
 
 <?php 
     $result_array = $carrito_model->index2($search,$carrito['id']);
     foreach ($result_array as $row) {
+         $articulo= $articulo_model->getArticuloById($row['idArticulo']);
          echo "<tr>";
-          echo "<td>" . $row['descripcion'] . "</td>";
-          echo "<td>" . $row['imagen'] . "</td>";
+          echo "<td>" . $articulo['nombre'] . "</td>";
+          echo "<td>" . $articulo['descripcion'] . "</td>";
           echo "<td>" . $row['cantidad'] . "</td>";
-          echo "<td>$" . $row['total'] . "</td>";
-          echo "<td>" ."<a href='/articulos/delete.php?id=" . $row['id'] . "'>Eliminar</a>"."</td>";
+          echo "<td>" ."<a href='/articulos/delete.php? id=" . $row['id'] . "'>Eliminar</a>"."</td>";
         echo "</tr>";
     } 
 ?>

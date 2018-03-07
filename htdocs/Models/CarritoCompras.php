@@ -22,13 +22,19 @@ namespace Models {
   }
     public function index2($search,$idCarrito)
     {
-      $sql = "select * from articuloscarrito where descripcion ='".$search."' or idCarrito ='".$idCarrito."'";
+      $sql = "select * from articuloscarrito where idCarrito ='".$idCarrito."'";
       $result = $this->connection->executeSql($sql);
       return $this->connection->getResults($result);
     }
-    public function delete($id)
+    public function delete($idArticulo,$idCarrito)
     {
-      $sql = "DELETE FROM articuloscarrito WHERE id = $id";
+      $sql = "DELETE FROM articuloscarrito WHERE idArticulo = $id and idCarrito = $idCarrito" ;
+      $this->connection->executeSql($sql);
+    }
+     public function insertArticulo($idArticulo, $cantidad,$idCarrito)
+    {
+      $sql = "INSERT INTO articuloscarrito(idArticulo,cantidad,idCarrito) VALUES ('$idArticulo','$cantidad','$idCarrito')";
+      var_dump($sql);
       $this->connection->executeSql($sql);
     }
   } 
