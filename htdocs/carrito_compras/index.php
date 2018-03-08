@@ -1,17 +1,13 @@
 <?php
 $titulo = 'Carrito de compras';
-$search = isset($_GET['search']) ? $_GET['search'] : '';
 include '../seguridad/verificar_session.php';
 include '../DbSetup.php';
 include '../shared/header.php';
 include '../shared/nav.php';
 
+$search = isset($_GET['search']) ? $_GET['search'] : '';
 $user = $usuario_model->findUser($_SESSION['usuario_id']);
 $carrito= $carrito_model->getIdCarrito($user['id']);
-
-if ($user['rol'] == "Comprador"){ 
-     return header("Location: /home/fail.php");
-}
 ?>
 
 <!DOCTYPE html>
@@ -22,10 +18,12 @@ if ($user['rol'] == "Comprador"){
 </head>
 <body class="text-center">
 <br>
-<h2>Editar Articulos</h2>
+<h2>Articulos</h2>
 <br>
   <table align="center" border="3">
     <tr>
+      <th class="text-center">Id Carrito</th>
+      <th class="text-center">Id Articulo</th>
       <th class="text-center">Nombre</th>
       <th class="text-center">Descripcion</th>
       <th class="text-center">Precio</th>
@@ -38,6 +36,8 @@ if ($user['rol'] == "Comprador"){
     foreach ($result_array as $row) {
       $articulo= $articulo_model->getArticuloById($row['idArticulo']);
       echo "<tr>";
+        echo "<td>" . $row['idCarrito'] . "</td>";
+        echo "<td>" . $row['idArticulo'] . "</td>";
         echo "<td>" . $articulo['nombre'] . "</td>";
         echo "<td>" . $articulo['descripcion'] . "</td>";
         echo "<td>" . $articulo['precio'] . "</td>";

@@ -4,7 +4,7 @@
   include '../DbSetup.php'; 
   include '../shared/header.php';
   include '../shared/nav.php';
-
+ 
   if($_SERVER['REQUEST_METHOD'] == 'POST'){
     $carrito_model->deleteAll();
     return header("Location: /carrito_compras");

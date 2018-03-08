@@ -48,9 +48,9 @@ namespace Models {
       $this->connection->executeSql($sql);
     }
 
-    public function deleteAll($idCarrito)
+    public function deleteAll()
     {
-      $sql = "DELETE FROM articuloscarrito WHERE idCarrito = $idCarrito";
+      $sql = "DELETE FROM articuloscarrito";
       $this->connection->executeSql($sql);
     }
 
