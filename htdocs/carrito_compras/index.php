@@ -21,27 +21,42 @@ if ($user['rol'] == "Comprador"){
   <meta charset="utf-8">
 </head>
 <body class="text-center">
-
+<br>
 <h2>Editar Articulos</h2>
+<br>
   <table align="center" border="3">
     <tr>
       <th class="text-center">Nombre</th>
       <th class="text-center">Descripcion</th>
+      <th class="text-center">Precio</th>
       <th class="text-center">Cantidad</th>
+      <th class="text-center">Delete</th>
      </tr>
 
 <?php 
     $result_array = $carrito_model->index2($search,$carrito['id']);
     foreach ($result_array as $row) {
-         $articulo= $articulo_model->getArticuloById($row['idArticulo']);
-         echo "<tr>";
-          echo "<td>" . $articulo['nombre'] . "</td>";
-          echo "<td>" . $articulo['descripcion'] . "</td>";
-          echo "<td>" . $row['cantidad'] . "</td>";
-          echo "<td>" ."<a href='/carrito_compras/delete.php? id=" . $row['id'] . "'>Eliminar</a>"."</td>";
-        echo "</tr>";
+      $articulo= $articulo_model->getArticuloById($row['idArticulo']);
+      echo "<tr>";
+        echo "<td>" . $articulo['nombre'] . "</td>";
+        echo "<td>" . $articulo['descripcion'] . "</td>";
+        echo "<td>" . $articulo['precio'] . "</td>";
+        echo "<td>" . $row['cantidad'] . "</td>";
+        echo "<td>" ."<a href='/carrito_compras/delete.php? id=" . $row['id'] . "'>Eliminar</a>"."</td>";
+      echo "</tr>";
     } 
 ?>
 </table>
+
+<?php 
+  $result_array = $carrito_model->pay();
+  foreach ($result_array as $row) {
+  }
+?>
+<br>
+<a  type='button' class='btn btn-lg  btn-outline-primary'
+    href='/carrito_compras/pay.php? id=" . $row['id'] . "'>
+      Pagar $<?php echo $row['precio']?>
+</a>
 </body>
 </html>

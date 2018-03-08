@@ -8,6 +8,8 @@ require_once '../Models/Usuario.php';
 require_once '../Models/Articulo.php';
 require_once '../Models/Categoria.php';
 require_once '../Models/CarritoCompras.php';
+require_once '../Models/OrdenCompras.php';
+
 
 /*
     Polimorfismo:
@@ -30,6 +32,8 @@ $usuario_model = new Models\Usuario($connection);
 $articulo_model = new Models\Articulo($connection);
 $categoria_model = new Models\Categoria($connection);
 $carrito_model = new Models\CarritoCompras($connection);
+$orden_model = new Models\OrdenCompras($connection);
+
 
 /*
 $result = $connection->executeSql('select table_name from information_schema.tables limit 5');

@@ -15,7 +15,6 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <?php   ?>
   <title>Eliminar Articulo</title>
 </head>
 <body class="text-center">

@@ -31,13 +31,12 @@
 <body class="text-center">
   <h2>Agregar Articulos</h2>
   <form method="POST">
-    <label>Nombre</label>
-    <input type="text" placeholder="nombre" name="nombre">
+    <input type="text" placeholder="Nombre" name="nombre">
     <br>
-    <label>Descripcion:</label>
     <input type="text" placeholder="Descripción" name="descripcion" >
     <br>
-    <label>Categoria:</label>
+    <input  type="number" placeholder="Precio" name="precio"  min="1">
+    <br>
     <select name="id_categoria">
     <?php
       $result_array1 = $categoria_model->index($search);
@@ -45,15 +44,12 @@
         echo "<option  value='".$row['descripcion']."''>".$row['descripcion']."</option>";    
       } 
      ?>
-    </select> 
+
+    </select>     
     <br>
-    <label>Precio</label>
-    <input  type="number" placeholder="precio" name="precio"  min="1">
-    <br>
-    
     <style>
       .thumb {
-      height: 2 00px;
+      height: 200px;
       border: 1px solid #000;
       margin: 10px 5px 0 0;
       }
@@ -62,32 +58,27 @@
     <input type="file" id="files" name="imagen" >
     <br />
     <output id="list"></output>
-
     <script>
       function archivo(evt) {
         var files = evt.target.files; // FileList object
-   
         // Obtenemos la imagen del campo "file".
         for (var i = 0, f; f = files[i]; i++) {
           //Solo admitimos imágenes.
           if (!f.type.match('image.*')) {
               continue;
           }
-   
           var reader = new FileReader();
-   
           reader.onload = (function(theFile) {
             return function(e) {
-            // Insertamos la imagen
-            document.getElementById("list").innerHTML = ['<img class="thumb" src="', e.target.result,'" title="', escape(theFile.Location), '"/>'].join('');
+              // Insertamos la imagen
+              document.getElementById("list").innerHTML = ['<img class="thumb" src="', e.target.result,'" title="', escape(theFile.Location), '"/>'].join('');
             };
           })(f);
-   
           reader.readAsDataURL(f);
         }
       }
       document.getElementById('files').addEventListener('change', archivo, false);
-      </script>
+    </script>
     <br>
     <input type="submit" name="" value="Guardar">
   </form>

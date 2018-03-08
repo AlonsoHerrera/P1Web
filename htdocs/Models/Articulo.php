@@ -19,6 +19,8 @@ namespace Models {
         array_push($search_criteria, "descripcion ilike '%" . $search ."%'");
         array_push($search_criteria, "id_categoria ilike '%" . $search ."%'");
         array_push($search_criteria, "imagen ilike '%" . $search ."%'");
+        array_push($search_criteria, "nombre ilike '%" . $search ."%'");
+        array_push($search_criteria, "precio ilike '%" . $search ."%'");
 
         $sql .= " where " . join($search_criteria, ' or ');
       }

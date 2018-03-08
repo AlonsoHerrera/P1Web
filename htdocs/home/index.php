@@ -12,18 +12,22 @@
   
 if($_SERVER['REQUEST_METHOD'] == 'POST'){ 
 ?>
-<script type="text/javascript">
-  var cant;
-  cant=prompt('Digite la cantidad de articulos que desea agregar:');
-</script>
+
+  <script type="text/javascript">
+    var cant;
+    cant=prompt('Digite la cantidad de articulos que desea agregar:');
+  </script>
+
 <?php 
-$cantidad = "<script type='text/javascript'> document.write(cant) </script>";
- $id=$_POST['idArticulo'];
- var_dump($id,$cantidad,$carrito['id']);
-$carrito_model->insertArticulo( intval($id),'1',intval($carrito['id']));
+  $cantidad = "<script type='text/javascript'> document.write(cant) </script>";
+  $id=$_POST['idArticulo'];
+  var_dump($id,$cantidad,$carrito['id']);
+  $carrito_model->insertArticulo( intval($id),'1',intval($carrito['id']));
+  $carrito_model->insertOrden( intval($id),'1',intval($carrito['id']));
 
 }
 ?>
+
 <style type="text/css">
   #id{
     display : none;
@@ -40,38 +44,33 @@ $carrito_model->insertArticulo( intval($id),'1',intval($carrito['id']));
   <?php
     $result_array2 = $categoria_model->index($search);
     foreach ($result_array2 as $row) {
-      echo "  <option  value='". $row['descripcion'] ."' >".$row['descripcion'] . "</option>";
+      echo "  <option value='". $row['descripcion'] ."' >".$row['descripcion'] . "</option>";
     }
   ?>
 </select>
-<input type="submit" value="Search">
+<input type='submit' class='btn btn-lg btn-outline-primary' value="Search">
+<input type='submit' class='btn btn-lg btn-outline-primary' value="Limpiar filtro">
 </form>
-
-<form method="GET">
-  <input type="submit" value="Limpiar filtro">
-</form>
-
+<br>
 <div class="card-deck mb-3 text-center">
  <?php
       $result_array = $articulo_model->index2($search);
         foreach ($result_array as $row) {
           echo " <form  method='POST'>";
-        echo (" <div class='card mb-4 box-shadow'> ");   
-        echo" <div class='card-header'>";
-        echo " <h4 class='my-0 font-weight-normal'>".$row['nombre']."</h4>";
-        echo "</div>";   
-        echo "<div class='card-body'>";  
-        echo " <h1 class='card-title pricing-card-title'>"."$".$row['precio']. "<small class='text-muted'></small></h1>";
-        echo " <ul class='list-unstyled mt-3 mb-4'>";
-        echo "<li>".$row['descripcion']."</li>"; 
-        echo "<input type='text' id='id' name='idArticulo' value='".$row['id']."'>";   
-        echo"</ul>" ;  
-        //echo "<button type='button' class='btn btn-lg btn-block btn-outline-primary'>Añadir al carrito</button>";
-         echo "<input type='submit' name='' value='Añadir al carrito'>";   
-
-        echo " </div>";
-        echo " </div>"; 
-        echo "</form>";
+          echo (" <div class='card mb-4 box-shadow'> ");   
+          echo" <div class='card-header'>";
+          echo " <h4 class='my-0 font-weight-normal'>".$row['nombre']."</h4>";
+          echo "</div>";   
+          echo "<div class='card-body'>";  
+          echo " <h1 class='card-title pricing-card-title'>"."$".$row['precio']. "<small class='text-muted'></small></h1>";
+          echo " <ul class='list-unstyled mt-3 mb-4'>";
+          echo "<li>".$row['descripcion']."</li>"; 
+          echo "<input type='text' id='id' name='idArticulo' value='".$row['id']."'>";   
+          echo"</ul>" ;  
+          echo "<input class='btn btn-lg btn-outline-primary' type='submit' name='' value='Añadir al carrito'>";   
+          echo " </div>";
+          echo " </div>"; 
+          echo "</form>";
       } 
     ?>
 </div>
