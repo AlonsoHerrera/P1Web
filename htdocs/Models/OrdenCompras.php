@@ -47,9 +47,15 @@ namespace Models {
 
     public function index2($search,$idCarrito)
     {
-      $sql = "select * from articuloscarrito where idCarrito ='".$idCarrito."'";
+      $sql = "select * from orden_compra where idCarrito ='".$idCarrito."'";
       $result = $this->connection->executeSql($sql);
       return $this->connection->getResults($result);
+    }
+
+    public function getIdCarrito($idUsuario)
+    {
+      $result = $this->connection->executeSql("select * from carritocompras where idUsuario =  '$idUsuario' ");
+      return $this->connection->getResults($result)[0];
     }
   } 
 }

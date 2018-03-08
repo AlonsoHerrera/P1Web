@@ -7,7 +7,7 @@
 
 $search = isset($_GET['search']) ? $_GET['search'] : '';
 $user = $usuario_model->findUser($_SESSION['usuario_id']);
-$carrito= $carrito_model->getIdCarrito($user['id']);
+$carrito= $orden_model->getIdCarrito($user['id']);
 ?>
 
 <!DOCTYPE html>
@@ -23,6 +23,7 @@ $carrito= $carrito_model->getIdCarrito($user['id']);
       <th class="text-center">Nombre</th>
       <th class="text-center">Id Articulo</th>
       <th class="text-center">Cantidad</th>
+      <th class="text-center">Precio</th>
       <th class="text-center">Id Carrito</th>
       <th class="text-center">Delete</th>
     </tr>
@@ -36,6 +37,7 @@ $carrito= $carrito_model->getIdCarrito($user['id']);
           echo "<td>" . $articulo['nombre'] . "</td>";
           echo "<td>" . $row['idArticulo'] . "</td>";
           echo "<td>" . $row['cantidad'] . "</td>";
+          echo "<td>$" . $articulo['precio'] . "</td>";
           echo "<td>" . $row['idCarrito'] . "</td>";
 
           echo "<td>" .

@@ -5,21 +5,23 @@
   include '../shared/header.php';
   include '../shared/nav.php';
  
+  $carrito= $carrito_model->getIdCarrito($user['id']);
+
   if($_SERVER['REQUEST_METHOD'] == 'POST'){
-    $carrito_model->deleteAll();
+    $carrito_model->deleteAll($carrito['id']);
     return header("Location: /carrito_compras");
   }
 ?>
 <!DOCTYPE html>
   <html>
     <head>
-      <?php  $result_array = $carrito_model->pay();
+      <?php  $result_array = $carrito_model->pay($carrito['id']);
       foreach ($result_array as $row) {
       } ?>
       <title>Eliminar Articulo</title>
     </head>
     <body class="text-center">
-      <h2>Cancelar compra</h2>
+      <h2>Realizar compra</h2>
       <p>
         Desea realizar el pago por: <strong> $<?php echo $row['precio']; ?></strong> 
       </p>

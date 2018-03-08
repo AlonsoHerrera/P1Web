@@ -40,7 +40,7 @@ $carrito= $carrito_model->getIdCarrito($user['id']);
         echo "<td>" . $row['idArticulo'] . "</td>";
         echo "<td>" . $articulo['nombre'] . "</td>";
         echo "<td>" . $articulo['descripcion'] . "</td>";
-        echo "<td>" . $articulo['precio'] . "</td>";
+        echo "<td>$" . $articulo['precio'] . "</td>";
         echo "<td>" . $row['cantidad'] . "</td>";
         echo "<td>" ."<a href='/carrito_compras/delete.php? id=" . $row['id'] . "'>Eliminar</a>"."</td>";
       echo "</tr>";
@@ -49,7 +49,7 @@ $carrito= $carrito_model->getIdCarrito($user['id']);
 </table>
 
 <?php 
-  $result_array = $carrito_model->pay();
+  $result_array = $carrito_model->pay($carrito['id']);
   foreach ($result_array as $row) {
   }
 ?>

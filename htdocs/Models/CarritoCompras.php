@@ -48,15 +48,15 @@ namespace Models {
       $this->connection->executeSql($sql);
     }
 
-    public function deleteAll()
+    public function deleteAll($idCarrito)
     {
-      $sql = "DELETE FROM articuloscarrito";
+      $sql = "DELETE FROM articuloscarrito WHERE idCarrito ='".$idCarrito."'";
       $this->connection->executeSql($sql);
     }
 
-    public function pay()
+    public function pay($idCarrito)
     {
-      $sql = "SELECT SUM(precio) AS precio FROM articulo INNER JOIN articuloscarrito ON articulo.id = articuloscarrito.idArticulo" ;
+      $sql = "SELECT SUM(precio) AS precio FROM articulo INNER JOIN articuloscarrito ON articulo.id = articuloscarrito.idArticulo where idCarrito ='".$idCarrito."'" ;
       $result = $this->connection->executeSql($sql);
       return $this->connection->getResults($result);
     }
