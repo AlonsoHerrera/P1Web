@@ -22,6 +22,7 @@ namespace Models {
       return $this->connection->getResults($result)[0];
     }
 
+
     public function index2($search,$idCarrito)
     {
       $sql = "select * from articuloscarrito where idCarrito ='".$idCarrito."'";

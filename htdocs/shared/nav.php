@@ -13,12 +13,6 @@
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="nav navbar-nav mr-auto">
       <li class="nav-item">
-        <a class="nav-link" href="/usuarios/index.php">Editar cuenta </a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="/seguridad/logout.php">Logout</a>
-      </li>
-      <li class="nav-item">
         <a class="nav-link" href="/articulos/new.php">Agregar Articulos</a>
       </li>
       <li class="nav-item">
@@ -36,12 +30,19 @@
       <li class="nav-item">
         <a class="nav-link" href="/orden_compra/index.php">Ordenes de compra</a>
       </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/usuarios/index.php">Editar cuenta </a>
+      </li>
+      <!--<li class="nav-item">
+        <a class="nav-link" href="/seguridad/logout.php">Logout</a>
+      </li>-->
     </ul>
     <!--<form class="form-inline my-2 my-lg-0">
       <input class="form-control mr-sm-2" type="text" placeholder="Search">
       <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
     </form>--> 
-      <a> <?php echo $user['nombre'] . "-" ;echo $user['rol'];?> </a>
+      <a class="nav-link"> <?php echo $user['nombre'] . "-" ;echo $user['rol'];?> </a>
+      <a class="nav-link" href="/seguridad/logout.php">Logout</a>
   </div>
 </nav>
 

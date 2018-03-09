@@ -21,7 +21,7 @@
         include '../shared/nav.php';  ?>
   <title>Eliminar Categoria</title>
 </head>
-<body>
+<body class="text-center">
   <h2>Eliminar Categoria</h2>
   <p>
     Esta seguro de eliminar la categoria: <strong><?php echo $categoria['descripcion']; ?></strong>

@@ -8,6 +8,7 @@
   $carrito= $carrito_model->getIdCarrito($user['id']);
 
   if($_SERVER['REQUEST_METHOD'] == 'POST'){
+    $orden_model->insert($carrito['id']);
     $carrito_model->deleteAll($carrito['id']);
     return header("Location: /carrito_compras");
   }

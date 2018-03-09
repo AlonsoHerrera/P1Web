@@ -22,7 +22,7 @@
         include '../shared/nav.php';  ?>
   <title>Eliminar Articulo</title>
 </head>
-<body>
+<body class="text-center">
   <h2>Eliminar Articulo</h2>
   <p>
     Esta seguro de eliminar el articulo: <strong><?php echo $articulo['descripcion']; ?></strong>

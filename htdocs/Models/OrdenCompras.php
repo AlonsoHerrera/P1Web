@@ -10,10 +10,33 @@ namespace Models {
       $this->connection = $connection;
     }
 
-    public function deleteOrden($id)
+
+    public function insert($idCarrito)
     {
-      $sql = "DELETE FROM orden_compra WHERE id = $id" ;
+      $sql = "INSERT INTO orden_compra(idCarrito) VALUES ('$idCarrito')";
       $this->connection->executeSql($sql);
+    }
+
+    public function getIdOrden()
+    {
+      $result = $this->connection->executeSql("select * from orden_compra ORDER BY id DESC LIMIT 1 ");
+      return $this->connection->getResults($result)[0];
+    }
+
+
+    public function insertArticulosOrden($idArticulo,$cantidad,$idOrdenCompra,$idCarrito)
+    {
+      $sql = "INSERT INTO articulosorden(idArticulo,cantidad,idOrdenCompra,idCarrito) VALUES 
+                                  ('$idArticulo','$cantidad','$idOrdenCompra','$idCarrito')";
+      var_dump($sql);
+      $this->connection->executeSql($sql);
+    }
+
+/*
+    public function getIdOrden($idUsuario)
+    {
+      $result = $this->connection->executeSql("select * from orden_compra where idUsuario =  '$idUsuario' ");
+      return $this->connection->getResults($result)[0];
     }
 
     public function findOrden($id)
@@ -22,11 +45,6 @@ namespace Models {
       return $this->connection->getResults($result)[0];
     }
 
-    public function getIdOrden($idUsuario)
-    {
-      $result = $this->connection->executeSql("select * from orden_compra where idUsuario =  '$idUsuario' ");
-      return $this->connection->getResults($result)[0];
-    }
 
      public function index($search, $idCarrito)
     {
@@ -44,17 +62,36 @@ namespace Models {
       $result = $this->connection->executeSql($sql);
       return $this->connection->getResults($result);
     }
-
-    public function index2($search,$idCarrito)
-    {
-      $sql = "select * from orden_compra where idCarrito ='".$idCarrito."'";
-      $result = $this->connection->executeSql($sql);
-      return $this->connection->getResults($result);
-    }
+*/
 
     public function getIdCarrito($idUsuario)
     {
       $result = $this->connection->executeSql("select * from carritocompras where idUsuario =  '$idUsuario' ");
+      return $this->connection->getResults($result)[0];
+    }
+    
+    public function index2($search,$idCarrito)
+    {
+      $sql = "select * from articulosorden where idCarrito ='".$idCarrito."'";
+      $result = $this->connection->executeSql($sql);
+      return $this->connection->getResults($result);
+    }
+
+    public function getIdOrden2($idUsuario)
+    {
+      $result = $this->connection->executeSql("select * from orden_compra where idUsuario =  '$idUsuario'");
+      return $this->connection->getResults($result)[0];
+    }
+
+    public function deleteArticulosOrden($id)
+    {
+      $sql = "DELETE FROM articulosorden WHERE id = $id" ;
+      $this->connection->executeSql($sql);
+    }
+
+    public function findOrden($id)
+    {
+      $result = $this->connection->executeSql("select * from articulosorden where id = '$id'");
       return $this->connection->getResults($result)[0];
     }
   } 

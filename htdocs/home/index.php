@@ -7,16 +7,18 @@
   include '../DbSetup.php';
   $search = isset($_GET['search']) ? $_GET['search'] : '';
   $user = $usuario_model->findUser($_SESSION['usuario_id']);
-  
   $carrito= $carrito_model->getIdCarrito($user['id']);
+
+  
+  $orden= $orden_model->getIdOrden();
   
 if($_SERVER['REQUEST_METHOD'] == 'POST'){ 
 ?>
 
-  <script type="text/javascript">
+ <!-- <script type="text/javascript">
     var cant;
     cant=prompt('Digite la cantidad de articulos que desea agregar:');
-  </script>
+  </script>-->
 
 <?php 
   $cantidad = "<script type='text/javascript'> document.write(cant) </script>";
@@ -24,6 +26,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
   var_dump($id,$cantidad,$carrito['id']);
   $carrito_model->insertArticulo( intval($id),'1',intval($carrito['id']));
   $carrito_model->insertOrden( intval($id),'1',intval($carrito['id']));
+  $orden_model->insertArticulosOrden( intval($id),'1', intval($orden['id']),intval($carrito['id']));
 
 }
 ?>

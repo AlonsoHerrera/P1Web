@@ -5,10 +5,17 @@
   include '../shared/header.php';
   include '../shared/nav.php';
   $id = isset($_GET['id']) ? $_GET['id'] : '';
+
   $articuloscarrito = $carrito_model->findArticulo($id);
   $user = $usuario_model->findUser($_SESSION['usuario_id']);
+
+        //$orden = $orden_model->findOrden($id);
+  //var_dump($orden_model->findOrden($id));
   if($_SERVER['REQUEST_METHOD'] == 'POST'){
     $carrito_model->delete($id);
+
+        //$orden_model->deleteArticulosOrden($id);
+
     return header("Location: /carrito_compras");
   }
 ?>

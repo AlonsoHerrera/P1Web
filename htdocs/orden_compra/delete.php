@@ -3,11 +3,11 @@
   include '../DbSetup.php';
   include '../shared/header.php';
   include '../shared/nav.php';
-  include '../seguridad/verificar_session.php';
+  //include '../seguridad/verificar_session.php';
   $id = isset($_GET['id']) ? $_GET['id'] : '';
   $orden = $orden_model->findOrden($id);
   if($_SERVER['REQUEST_METHOD'] == 'POST'){
-    $orden_model->deleteOrden($id);
+    $orden_model->deleteArticulosOrden($id);
     return header("Location: /orden_compra/index.php");
   }
 ?>
@@ -17,10 +17,10 @@
 <head>
   <title>Eliminar Orden</title>
 </head>
-<body>
+<body class="text-center">
   <h2>Eliminar Orden</h2>
   <p>
-    Esta seguro de eliminar el articulo de la orden: <strong><?php echo $orden['idCarrito']; ?></strong>
+    Esta seguro de eliminar el articulo de la orden: <strong><?php echo $orden['idOrdenCompra']; ?></strong>
   </p>
   <form method="POST">
     <input type="submit" value="Si">

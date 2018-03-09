@@ -1,5 +1,8 @@
 <?php
   $titulo = 'Categorias';
+  include '../shared/header.php';
+  include '../shared/nav.php';
+  include '../seguridad/verificar_session.php';
   if($_SERVER['REQUEST_METHOD'] == 'POST'){ 
     include '../DbSetup.php';
 
@@ -13,11 +16,8 @@
       return header("Location: /home/index.php");
     }
   }
-  include '../shared/header.php';
-  include '../shared/nav.php';
 ?>
 <?php 
-  include '../seguridad/verificar_session.php';
   $user = $usuario_model->findUser($_SESSION['usuario_id']);
   if ($user['rol'] == "Comprador"){ 
     return header("Location: /home/fail.php");
@@ -25,7 +25,6 @@
 <body class="text-center">
   <h2>Agregar Categoria</h2>
   <form method="POST">
-    <label>Descripcion:</label>
     <input type="text" placeholder="Descripción" name="descripcion" >
     <br>
     <input type="submit" placeholder="Guardar" name="" value="Guardar">

@@ -1,6 +1,6 @@
 <?php
   $titulo = 'Editar Articulo';
-  include '../seguridad/verificar_session.php';
+  //include '../seguridad/verificar_session.php';
   include '../DbSetup.php';
   $id = isset($_GET['id']) ? $_GET['id'] : '';
   if($_SERVER['REQUEST_METHOD'] == 'POST'){
@@ -27,7 +27,7 @@
         include '../shared/nav.php'; ?>
   <title>Editar Articulo</title>
 </head>
-<body>
+<body class="text-center">
   <h2>Editar Articulo</h2>
   <form method="POST">
     <label>Nombre:</label>

@@ -1,6 +1,6 @@
 <?php
 $titulo = 'Carrito de compras';
-include '../seguridad/verificar_session.php';
+//include '../seguridad/verificar_session.php';
 include '../DbSetup.php';
 include '../shared/header.php';
 include '../shared/nav.php';
