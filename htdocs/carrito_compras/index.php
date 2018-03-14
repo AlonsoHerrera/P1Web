@@ -13,12 +13,11 @@ $carrito= $carrito_model->getIdCarrito($user['id']);
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Carrito Compras</title>
   <meta charset="utf-8">
 </head>
 <body class="text-center">
 <br>
-<h2>Articulos</h2>
+<h2> Carrito Compras</h2>
 <br>
   <table align="center" border="3">
     <tr>

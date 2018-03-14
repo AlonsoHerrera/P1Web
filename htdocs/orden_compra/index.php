@@ -1,5 +1,5 @@
 <?php
-  $titulo = 'Ordenes de compra';
+  $titulo = '';
   //include '../seguridad/verificar_session.php';
   include '../DbSetup.php';
   include '../shared/header.php';
@@ -15,38 +15,38 @@ $carrito= $orden_model->getIdCarrito($user['id']);
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Ordenes de compra</title>
   <meta charset="utf-8">
 </head>
 <body class="text-center">
-  <h2>Vista de Ordenes</h2>
+  <h2>Ordenes de compra</h2>
+
+
+<form method="GET">
+<input type="text" autofocus name="search" value="<?php echo  $search  ?>">
+<input type='submit' class='btn btn-lg btn-outline-primary' value="Buscar">
+</form>
+<form method="GET">
+<input type='submit' class='btn btn-lg btn-outline-primary' value="Limpiar filtro">
+</form>
+
   <table align="center" border="3">
     <tr>
-      <th class="text-center">Id articulo</th>
-      <th class="text-center">Nombre</th>
+      <th class="text-center">Articulo</th>
       <th class="text-center">Cantidad</th>
       <th class="text-center">Precio</th>
-      <th class="text-center">Orden</th>
-      <th class="text-center">Id Carrito</th> 
-      <th class="text-center">Delete</th>
+      <th class="text-center">#OrdenCompra</th>
     </tr>
     
     <?php
       include '../DbSetup.php';
-      $result_array = $orden_model->index2($search,$carrito['id']);
+      $result_array = $orden_model->index3($search,$carrito['id']);
       foreach ($result_array as $row) {
         $articulo= $articulo_model->getArticuloById($row['idArticulo']);
         echo "<tr>";
-          echo "<td>" . $row['idArticulo'] . "</td>";
           echo "<td>" . $articulo['nombre'] . "</td>";
           echo "<td>" . $row['cantidad'] . "</td>";
           echo "<td>$" . $articulo['precio'] . "</td>";
           echo "<td>" . $row['idOrdenCompra'] . "</td>";
-          echo "<td>" . $row['idCarrito'] . "</td>";
-
-          echo "<td>" .
-                "<a href='/orden_compra/delete.php?id=" . $row['id'] . "'>Eliminar</a>".
-                "</td>";
         echo "</tr>";
       } 
     ?>

@@ -30,9 +30,6 @@
       <li class="nav-item">
         <a class="nav-link" href="/orden_compra/index.php">Ordenes de compra</a>
       </li>
-      <li class="nav-item">
-        <a class="nav-link" href="/usuarios/index.php">Editar cuenta </a>
-      </li>
       <!--<li class="nav-item">
         <a class="nav-link" href="/seguridad/logout.php">Logout</a>
       </li>-->
@@ -41,7 +38,7 @@
       <input class="form-control mr-sm-2" type="text" placeholder="Search">
       <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
     </form>--> 
-      <a class="nav-link"> <?php echo $user['nombre'] . "-" ;echo $user['rol'];?> </a>
+      <a class="nav-link" href="/usuarios/index.php"> <?php echo $user['nombre'] . "-" ;echo $user['rol'];?> </a>
       <a class="nav-link" href="/seguridad/logout.php">Logout</a>
   </div>
 </nav>

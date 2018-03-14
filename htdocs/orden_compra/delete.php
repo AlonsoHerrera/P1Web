@@ -1,5 +1,5 @@
 <?php
-  $titulo = 'Ordenes';
+  $titulo = '';
   include '../DbSetup.php';
   include '../shared/header.php';
   include '../shared/nav.php';

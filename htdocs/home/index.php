@@ -1,5 +1,5 @@
 <?php
-  $titulo = 'Home';
+  $titulo = '';
    // include '../seguridad/verificar_session.php';
   include '../shared/header.php';
   include '../shared/nav.php';
@@ -23,7 +23,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
 <?php 
   $cantidad = "<script type='text/javascript'> document.write(cant) </script>";
   $id=$_POST['idArticulo'];
-  var_dump($id,$cantidad,$carrito['id']);
+  //var_dump($id,$cantidad,$carrito['id']);
   $carrito_model->insertArticulo( intval($id),'1',intval($carrito['id']));
   $carrito_model->insertOrden( intval($id),'1',intval($carrito['id']));
   $orden_model->insertArticulosOrden( intval($id),'1', intval($orden['id']),intval($carrito['id']));
@@ -35,8 +35,14 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
   #id{
     display : none;
   }
+
 </style>
 <body>
+<script type="text/javascript">
+  function Agregado(){
+    alert('Articulo agregado al carrito!');
+  }
+</script>
 <div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
   <h1 class="display-4">Articulos</h1>
 </div>
@@ -70,7 +76,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
           echo "<li>".$row['descripcion']."</li>"; 
           echo "<input type='text' id='id' name='idArticulo' value='".$row['id']."'>";   
           echo"</ul>" ;  
-          echo "<input class='btn btn-lg btn-outline-primary' type='submit' name='' value='Añadir al carrito'>";   
+          echo "<input class='btn btn-lg btn-outline-primary' onclick='Agregado()' type='submit' name='' value='Añadir al carrito'>";   
           echo " </div>";
           echo " </div>"; 
           echo "</form>";
