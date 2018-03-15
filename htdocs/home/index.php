@@ -75,6 +75,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
           echo " <ul class='list-unstyled mt-3 mb-4'>";
           echo "<li>".$row['descripcion']."</li>"; 
           echo "<input type='text' id='id' name='idArticulo' value='".$row['id']."'>";   
+           echo "<td>" ."<img style=\"width: 20%;\" src='/imagenes/" . $row['imagen'] . "'>" . "</td>";
           echo"</ul>" ;  
           echo "<input class='btn btn-lg btn-outline-primary' onclick='Agregado()' type='submit' name='' value='Añadir al carrito'>";   
           echo " </div>";

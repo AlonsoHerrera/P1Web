@@ -47,7 +47,7 @@ $search = isset($_GET['search']) ? $_GET['search'] : '';
           echo "<td>" . $row['descripcion'] . "</td>";
           echo "<td>" . $row['precio'] . "</td>";
           echo "<td>" . $row['id_categoria'] . "</td>";
-          echo "<td>" . $row['imagen'] . "</td>";
+          echo "<td>" ."<img style=\"width: 15%;\" src='/imagenes/" . $row['imagen'] . "'>" . "</td>";
           echo "<td>" .
                 "<a href='/articulos/edit.php?id=" . $row['id'] . "'>Editar</a>".
                 " ".

@@ -24,10 +24,9 @@ $carrito= $orden_model->getIdCarrito($user['id']);
 <form method="GET">
 <input type="text" autofocus name="search" value="<?php echo  $search  ?>">
 <input type='submit' class='btn btn-lg btn-outline-primary' value="Buscar">
-</form>
-<form method="GET">
 <input type='submit' class='btn btn-lg btn-outline-primary' value="Limpiar filtro">
 </form>
+<br>
 
   <table align="center" border="3">
     <tr>
