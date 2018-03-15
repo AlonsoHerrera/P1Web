@@ -1,6 +1,5 @@
 <?php
   $titulo = '';
-   // include '../seguridad/verificar_session.php';
   include '../shared/header.php';
   include '../shared/nav.php';
   include '../shared/footer.php';
@@ -8,26 +7,18 @@
   $search = isset($_GET['search']) ? $_GET['search'] : '';
   $user = $usuario_model->findUser($_SESSION['usuario_id']);
   $carrito= $carrito_model->getIdCarrito($user['id']);
-
   
   $orden= $orden_model->getIdOrden();
   
 if($_SERVER['REQUEST_METHOD'] == 'POST'){ 
 ?>
 
- <!-- <script type="text/javascript">
-    var cant;
-    cant=prompt('Digite la cantidad de articulos que desea agregar:');
-  </script>-->
-
 <?php 
   $cantidad = "<script type='text/javascript'> document.write(cant) </script>";
   $id=$_POST['idArticulo'];
-  //var_dump($id,$cantidad,$carrito['id']);
   $carrito_model->insertArticulo( intval($id),'1',intval($carrito['id']));
   $carrito_model->insertOrden( intval($id),'1',intval($carrito['id']));
   $orden_model->insertArticulosOrden( intval($id),'1', intval($orden['id']),intval($carrito['id']));
-
 }
 ?>
 
@@ -88,7 +79,6 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
 </footer>
 </div>
 
-
     <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
@@ -97,5 +87,4 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
     <script src="../../../../assets/js/vendor/popper.min.js"></script>
     <script src="../../../../dist/js/bootstrap.min.js"></script>
     <script src="../../../../assets/js/vendor/holder.min.js"></script>
-    
-  </body>
+</body>

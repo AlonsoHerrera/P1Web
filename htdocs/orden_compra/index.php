@@ -30,6 +30,7 @@ $carrito= $orden_model->getIdCarrito($user['id']);
 
   <table align="center" border="3">
     <tr>
+      <th class="text-center">Imagen</th>
       <th class="text-center">Articulo</th>
       <th class="text-center">Cantidad</th>
       <th class="text-center">Precio</th>
@@ -42,6 +43,7 @@ $carrito= $orden_model->getIdCarrito($user['id']);
       foreach ($result_array as $row) {
         $articulo= $articulo_model->getArticuloById($row['idArticulo']);
         echo "<tr>";
+          echo "<td>" ."<img style=\"width: 20%;\" src='/imagenes/" . $articulo['imagen'] . "'>" . "</td>";
           echo "<td>" . $articulo['nombre'] . "</td>";
           echo "<td>" . $row['cantidad'] . "</td>";
           echo "<td>$" . $articulo['precio'] . "</td>";

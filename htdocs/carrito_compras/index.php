@@ -21,6 +21,7 @@ $carrito= $carrito_model->getIdCarrito($user['id']);
 <br>
   <table align="center" border="3">
     <tr>
+      <th class="text-center">Imagen</th>
       <th class="text-center">Id Carrito</th>
       <th class="text-center">Id Articulo</th>
       <th class="text-center">Nombre</th>
@@ -35,6 +36,7 @@ $carrito= $carrito_model->getIdCarrito($user['id']);
     foreach ($result_array as $row) {
       $articulo= $articulo_model->getArticuloById($row['idArticulo']);
       echo "<tr>";
+       echo "<td>" ."<img style=\"width: 20%;\" src='/imagenes/" . $articulo['imagen'] . "'>" . "</td>";
         echo "<td>" . $row['idCarrito'] . "</td>";
         echo "<td>" . $row['idArticulo'] . "</td>";
         echo "<td>" . $articulo['nombre'] . "</td>";
